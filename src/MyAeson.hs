@@ -66,6 +66,9 @@ parseArray _           = fail "expected an array"
 
 data Person = Person {name :: String, age :: Int}
 
+instance Show Person where
+  show p = name p ++ ", " ++ show (age p)
+
 instance FromJSON Person where
   parseJSON = withObject "person" $ \o ->
       Person <$> o .: "name" <*> o .: "age"

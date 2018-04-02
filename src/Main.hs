@@ -2,28 +2,34 @@
 
 module Main where
 
+import Control.Monad.Trans (liftIO)
 import Web.Scotty
 import MyAeson
+import PeopleDB
+import qualified Data.Aeson as A
 
 chrstmsly :: ScottyM ()
 chrstmsly = do
   get "/" showLandingPage
   get "/:name" showPerson
-  post "/" doTheParsing
+  post "/" createPerson
 
 showLandingPage :: ActionM ()
 showLandingPage = do
   text "hello there"
 
-doTheParsing :: ActionM ()
-doTheParsing = do
+createPerson :: ActionM ()
+createPerson = do
   p <- jsonData :: ActionM Person 
   json p
 
 showPerson :: ActionM()
 showPerson = do
   n <- param "name"
-  json $ Person n 42
+  p <- liftIO (findPerson n)
+  case p of
+    Just match -> json match
+    Nothing -> json $ A.object [ "error" A..= ("Not found: " ++ n) ]
 
 main :: IO ()
 main =

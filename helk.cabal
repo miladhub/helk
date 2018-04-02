@@ -23,4 +23,6 @@ executable helk
                        aeson,
                        unordered-containers,
                        text,
-                       vector
+                       vector,
+                       split,
+                       mtl
