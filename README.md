@@ -11,7 +11,7 @@ This is a hello world project in Haskell.
 
 ## create a person
 
-    $ curl -X POST http://localhost:9176 -d '{ "name": "foo", "age": 42 }'
+    $ curl http://localhost:9176 -d '{ "name": "foo", "age": 42 }'
     {"age":42,"name":"foo"}
 
 ## look up a person by name
