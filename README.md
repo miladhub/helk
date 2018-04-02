@@ -9,9 +9,13 @@ This is a hello world project in Haskell.
 
 # Run
 
-    curl -X POST http://localhost:9176 -d '{ "name": "foo", "age": 42 }'
+## create a person
 
-The answer should be something like this:
-
+    $ curl -X POST http://localhost:9176 -d '{ "name": "foo", "age": 42 }'
     {"age":42,"name":"foo"}
+
+## look up a person by name
+
+    $ curl http://localhost:9176/bar
+    {"age":42,"name":"bar"}
 
