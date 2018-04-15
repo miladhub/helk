@@ -7,6 +7,7 @@ import Web.Scotty
 import MyAeson
 import PeopleDB
 import qualified Data.Aeson as A
+import MyMongo
 
 chrstmsly :: ScottyM ()
 chrstmsly = do
