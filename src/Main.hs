@@ -8,6 +8,7 @@ import MyAeson
 import PeopleDB
 import qualified Data.Aeson as A
 import MyMongo
+import Data.Text.Lazy
 
 chrstmsly :: ScottyM ()
 chrstmsly = do
@@ -17,7 +18,9 @@ chrstmsly = do
 
 showLandingPage :: ActionM ()
 showLandingPage = do
-  text "hello there"
+  readme <- liftIO $ readFile "README.md"
+  text . pack $ readme
+  return ()
 
 createPerson :: ActionM ()
 createPerson = do

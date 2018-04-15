@@ -1,6 +1,6 @@
 # helk
 
-This is a hello world project in Haskell.
+This is a hello world project in Haskell. The project uses Scotty for REST, Aeson for JSON manipulation and MongoDB for persistence.
 
 # Build
 
@@ -8,6 +8,10 @@ This is a hello world project in Haskell.
     stack exec helk
 
 # Run
+
+## look at this README
+
+    $ curl http://localhost:9176
 
 ## create a person
 
