@@ -22,12 +22,13 @@ showLandingPage = do
 createPerson :: ActionM ()
 createPerson = do
   p <- jsonData :: ActionM Person 
+  liftIO $ insertPersMongo p
   json p
 
 showPerson :: ActionM()
 showPerson = do
   n <- param "name"
-  p <- liftIO (findPerson n)
+  p <- liftIO $ findPersMongo n
   case p of
     Just match -> json match
     Nothing -> json $ A.object [ "error" A..= ("Not found: " ++ n) ]
