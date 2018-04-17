@@ -6,6 +6,7 @@ import Database.MongoDB
 import qualified Database.MongoDB as M (lookup)
 import Control.Monad.IO.Class
 import MyAeson
+import Control.Monad.Reader
 
 ppl :: Action IO a -> IO a
 ppl act = do
@@ -28,13 +29,20 @@ toDoc :: Person -> Document
 toDoc p = ["name" =: (name p), "age" =: (age p)]
 
 fromDoc :: Document -> Maybe Person
-fromDoc d = do
-    n <- getName d
-    a <- getAge d
-    return $ Person n a
+fromDoc = runReader $ do
+    maybeName <- getName
+    maybeAge <- getAge
+    return $ do
+        name <- maybeName
+        age <- maybeAge
+        return $ Person name age
 
-getName :: Document -> Maybe String
-getName d = M.lookup "name" d :: Maybe String
+getName :: Reader Document (Maybe String)
+getName = do
+    doc <- ask
+    return (M.lookup "name" doc :: Maybe String)
 
-getAge :: Document -> Maybe Int
-getAge d = M.lookup "age" d :: Maybe Int
+getAge :: Reader Document (Maybe Int)
+getAge = do
+    doc <- ask
+    return (M.lookup "age" doc :: Maybe Int)
