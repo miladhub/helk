@@ -5,7 +5,6 @@ module Main where
 import Control.Monad.Trans (liftIO)
 import Web.Scotty
 import MyAeson
-import PeopleDB
 import qualified Data.Aeson as A
 import MyMongo
 import Data.Text.Lazy
