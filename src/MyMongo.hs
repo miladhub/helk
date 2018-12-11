@@ -29,20 +29,13 @@ toDoc :: Person -> Document
 toDoc p = ["name" =: (name p), "age" =: (age p)]
 
 fromDoc :: Document -> Maybe Person
-fromDoc = runReader $ do
-    maybeName <- getName
-    maybeAge <- getAge
-    return $ do
-        name <- maybeName
-        age <- maybeAge
-        return $ Person name age
+fromDoc = runReaderT $ do
+  name <- getName
+  age <- getAge
+  return $ Person name age
 
-getName :: Reader Document (Maybe String)
-getName = do
-    doc <- ask
-    return (M.lookup "name" doc :: Maybe String)
+getName :: ReaderT Document Maybe String
+getName = ReaderT $ \doc -> (M.lookup "name" doc :: Maybe String)
 
-getAge :: Reader Document (Maybe Int)
-getAge = do
-    doc <- ask
-    return (M.lookup "age" doc :: Maybe Int)
+getAge :: ReaderT Document Maybe Int
+getAge = ReaderT $ \doc -> (M.lookup "age" doc :: Maybe Int)
