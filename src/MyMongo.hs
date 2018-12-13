@@ -35,7 +35,7 @@ fromDoc = runReaderT $ do
   return $ Person name age
 
 getName :: ReaderT Document Maybe String
-getName = ReaderT $ \doc -> (M.lookup "name" doc :: Maybe String)
+getName = ReaderT $ M.lookup "name"
 
 getAge :: ReaderT Document Maybe Int
-getAge = ReaderT $ \doc -> (M.lookup "age" doc :: Maybe Int)
+getAge = ReaderT $ M.lookup "age"
