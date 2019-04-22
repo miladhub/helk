@@ -27,7 +27,7 @@ createPerson = do
   liftIO $ insertPersMongo p
   json p
 
-showPerson :: ActionM()
+showPerson :: ActionM ()
 showPerson = do
   n <- param "name"
   p <- liftIO $ findPersMongo n
