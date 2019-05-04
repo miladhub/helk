@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module PeopleRepo where
+module PeopleRepo (findPeople, findPerson, createPerson, deletePerson) where
 
 import Database.MongoDB
 import qualified Database.MongoDB as M (lookup, find, select)
@@ -9,27 +9,31 @@ import People
 import Control.Monad.Reader
 import Data.Maybe
 
-ppl :: Action IO a -> IO a
-ppl act = do
-    pipe <- connect $ host "127.0.0.1"
-    r <- access pipe master "people" act
-    close pipe
-    return r
-
 findPeople :: IO [Person]
 findPeople =
   let docs = find (select [] "people") >>= rest
-  in fmap fromDocs (ppl docs)
+  in fmap fromDocs (onPeople docs)
 
-findPersMongo :: String -> IO (Maybe Person)
-findPersMongo n = do
-    doc <- ppl $ findOne $ select ["name" =: n] "people"
-    return $ doc >>= fromDoc
+findPerson :: String -> IO (Maybe Person)
+findPerson n = do
+  doc <- onPeople $ findOne $ select ["name" =: n] "people"
+  return $ doc >>= fromDoc
 
-insertPersMongo :: Person -> IO ()
-insertPersMongo p = do
-    ppl $ insert "people" $ toDoc p
-    return ()
+createPerson :: Person -> IO ()
+createPerson p = do
+  onPeople $ insert "people" $ toDoc p
+  return ()
+
+deletePerson :: String -> IO ()
+deletePerson n = do
+  onPeople $ delete (select ["name" =: n] "people")
+
+onPeople :: Action IO a -> IO a
+onPeople act = do
+  pipe <- connect $ host "127.0.0.1"
+  r <- access pipe master "people" act
+  close pipe
+  return r
 
 toDoc :: Person -> Document
 toDoc p = ["name" =: (name p), "age" =: (age p)]

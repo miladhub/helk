@@ -18,12 +18,23 @@ This is a hello world project in Haskell. The project uses Scotty for REST, Aeso
     $ curl http://localhost:9176/people -d '{ "name": "foo", "age": 42 }'
     {"age":42,"name":"foo"}
 
+    $ curl http://localhost:9176/people -d '{ "name": "bar", "age": 100 }'
+    {"age":100,"name":"bar"}
+
 ## look up a person by name
 
-    $ curl http://localhost:9176/people/bar
-    {"age":42,"name":"bar"}
+    $ curl http://localhost:9176/people/foo
+    {"age":42,"name":"foo"}
 
 ## retrieve all people
 
     $ curl http://localhost:9176/people
-    [{"age":42,"name":"foo"}]
+    [{"age":42,"name":"foo"},{"age":100,"name":"bar"}]
+
+## deleting people
+
+    $ curl -X DELETE http://localhost:9176/people/foo
+    $ curl -X DELETE http://localhost:9176/people/bar
+    $ curl http://localhost:9176/people
+    []
+

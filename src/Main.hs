@@ -14,7 +14,8 @@ helk = do
   get "/" showLandingPage
   get "/people/:name" showPerson
   get "/people/" showPeople
-  post "/people/" createPerson
+  post "/people/" addPerson
+  delete "/people/:name" removePerson
 
 showLandingPage :: ActionM ()
 showLandingPage = do
@@ -22,11 +23,16 @@ showLandingPage = do
   text . pack $ readme
   return ()
 
-createPerson :: ActionM ()
-createPerson = do
+addPerson :: ActionM ()
+addPerson = do
   p <- jsonData :: ActionM Person 
-  liftIO $ insertPersMongo p
+  liftIO $ createPerson p
   json p
+
+removePerson :: ActionM ()
+removePerson = do
+  n <- param "name"
+  liftIO $ deletePerson n
 
 showPeople :: ActionM ()
 showPeople = do
@@ -36,7 +42,7 @@ showPeople = do
 showPerson :: ActionM ()
 showPerson = do
   n <- param "name"
-  p <- liftIO $ findPersMongo n
+  p <- liftIO $ findPerson n
   case p of
     Just match -> json match
     Nothing -> status status404
