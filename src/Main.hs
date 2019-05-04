@@ -4,16 +4,17 @@ module Main where
 
 import Control.Monad.Trans (liftIO)
 import Web.Scotty
-import MyAeson
-import qualified Data.Aeson as A
-import MyMongo
+import People
+import PeopleRepo
 import Data.Text.Lazy
+import Network.HTTP.Types (status404)
 
-chrstmsly :: ScottyM ()
-chrstmsly = do
+helk :: ScottyM ()
+helk = do
   get "/" showLandingPage
-  get "/:name" showPerson
-  post "/" createPerson
+  get "/people/:name" showPerson
+  get "/people/" showPeople
+  post "/people/" createPerson
 
 showLandingPage :: ActionM ()
 showLandingPage = do
@@ -27,15 +28,20 @@ createPerson = do
   liftIO $ insertPersMongo p
   json p
 
+showPeople :: ActionM ()
+showPeople = do
+  ps <- liftIO $ findPeople
+  json ps
+
 showPerson :: ActionM ()
 showPerson = do
   n <- param "name"
   p <- liftIO $ findPersMongo n
   case p of
     Just match -> json match
-    Nothing -> json $ A.object [ "error" A..= ("Not found: " ++ n) ]
+    Nothing -> status status404
 
 main :: IO ()
 main =
-  scotty 9176 chrstmsly
+  scotty 9176 helk
 

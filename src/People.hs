@@ -1,13 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module MyAeson where
+module People where
 
 import Data.Aeson
 
 data Person =
   Person {
     name :: String
-  , age :: Int
+  , age  :: Int
   }
 
 instance Show Person where

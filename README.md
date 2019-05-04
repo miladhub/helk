@@ -15,11 +15,15 @@ This is a hello world project in Haskell. The project uses Scotty for REST, Aeso
 
 ## create a person
 
-    $ curl http://localhost:9176 -d '{ "name": "foo", "age": 42 }'
+    $ curl http://localhost:9176/people -d '{ "name": "foo", "age": 42 }'
     {"age":42,"name":"foo"}
 
 ## look up a person by name
 
-    $ curl http://localhost:9176/bar
+    $ curl http://localhost:9176/people/bar
     {"age":42,"name":"bar"}
 
+## retrieve all people
+
+    $ curl http://localhost:9176/people
+    [{"age":42,"name":"foo"}]

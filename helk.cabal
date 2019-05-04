@@ -26,5 +26,5 @@ executable helk
                        vector,
                        split,
                        mtl,
-                       mongoDB
-
+                       mongoDB,
+                       http-types
