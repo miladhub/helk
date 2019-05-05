@@ -41,7 +41,7 @@ toDoc p = ["name" =: (name p), "age" =: (age p)]
 fromDocs :: [Document] -> [Person]
 fromDocs ds = 
   let mp = fmap fromDoc ds
-  in fmap fromJust $ Prelude.filter isJust $ mp
+  in catMaybes mp
 
 fromDoc :: Document -> Maybe Person
 fromDoc = runReaderT $ do
