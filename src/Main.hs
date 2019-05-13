@@ -8,9 +8,11 @@ import People
 import PeopleRepo
 import Data.Text.Lazy
 import Network.HTTP.Types (status404)
+import Network.Wai.Middleware.Cors
 
 helk :: ScottyM ()
 helk = do
+  middleware simpleCors
   get "/" showLandingPage
   get "/people/:name" showPerson
   get "/people/" showPeople

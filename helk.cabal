@@ -27,4 +27,5 @@ executable helk
                        split,
                        mtl,
                        mongoDB,
-                       http-types
+                       http-types,
+                       wai-cors
