@@ -15,8 +15,8 @@ helk = do
   middleware simpleCors
   get "/" showLandingPage
   get "/people/:name" showPerson
-  get "/people/" showPeople
-  post "/people/" addPerson
+  get "/people" showPeople
+  post "/people" addPerson
   delete "/people/:name" removePerson
 
 showLandingPage :: ActionM ()
