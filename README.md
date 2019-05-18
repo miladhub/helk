@@ -5,7 +5,7 @@ This is a hello world project in Haskell. The project uses Scotty for REST, Aeso
 # Build
 
     stack build
-    stack exec helk
+    stack exec helk-exe
 
 # Run
 
