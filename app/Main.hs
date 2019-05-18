@@ -12,7 +12,10 @@ import Network.Wai.Middleware.Cors
 
 helk :: ScottyM ()
 helk = do
-  middleware simpleCors
+  middleware . cors . const $
+    Just simpleCorsResourcePolicy {
+      corsMethods = ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTION"]
+    }
   get "/" showLandingPage
   get "/people/:name" showPerson
   get "/people" showPeople
