@@ -9,11 +9,11 @@ This is a hello world project in Haskell. The project uses Scotty for REST, Aeso
 
 # Run
 
-## look at this README
+## Viewing this README
 
     $ curl http://localhost:9176
 
-## create a person
+## Creating a person
 
     $ curl http://localhost:9176/people -d '{ "name": "foo", "age": 42 }'
     {"age":42,"name":"foo"}
@@ -21,17 +21,17 @@ This is a hello world project in Haskell. The project uses Scotty for REST, Aeso
     $ curl http://localhost:9176/people -d '{ "name": "bar", "age": 100 }'
     {"age":100,"name":"bar"}
 
-## look up a person by name
+## Looking up by name
 
     $ curl http://localhost:9176/people/foo
     {"age":42,"name":"foo"}
 
-## retrieve all people
+## Retrieving all people
 
     $ curl http://localhost:9176/people
     [{"age":42,"name":"foo"},{"age":100,"name":"bar"}]
 
-## deleting people
+## Deleting people
 
     $ curl -X DELETE http://localhost:9176/people/foo
     $ curl -X DELETE http://localhost:9176/people/bar

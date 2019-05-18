@@ -1,31 +1,97 @@
-name:                helk
-version:             0.1.0.0
--- synopsis:
--- description:
-homepage:            https://github.com/miladhub/helk#readme
-license:             MIT
-license-file:        LICENSE
-author:              Author name miladhub
-maintainer:          milad.bourhani@gmail.com
-copyright:           2018 Author Milad Bourhani
-category:            Web
-build-type:          Simple
-cabal-version:       >=1.10
-extra-source-files:  README.md
+cabal-version: 1.12
 
-executable helk
-  hs-source-dirs:      src
-  main-is:             Main.hs
-  default-language:    Haskell2010
-  build-depends:       base >= 4.7 && < 5,
-                       scotty,
-                       wreq,
-                       aeson,
-                       unordered-containers,
-                       text,
-                       vector,
-                       split,
-                       mtl,
-                       mongoDB,
-                       http-types,
-                       wai-cors
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 587751a2ce7240843fa05a8fbc31febf3fd0f23ede82814a659debf31bb7c1fb
+
+name:           helk
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/helk#readme>
+homepage:       https://github.com/githubuser/helk#readme
+bug-reports:    https://github.com/githubuser/helk/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2019 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/helk
+
+library
+  exposed-modules:
+      Fiddling
+      People
+      PeopleRepo
+  other-modules:
+      Paths_helk
+  hs-source-dirs:
+      src
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , http-types
+    , mongoDB
+    , mtl
+    , scotty
+    , split
+    , text
+    , unordered-containers
+    , vector
+    , wai-cors
+    , wreq
+  default-language: Haskell2010
+
+executable helk-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_helk
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , helk
+    , http-types
+    , mongoDB
+    , mtl
+    , scotty
+    , split
+    , text
+    , unordered-containers
+    , vector
+    , wai-cors
+    , wreq
+  default-language: Haskell2010
+
+test-suite helk-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_helk
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , helk
+    , http-types
+    , mongoDB
+    , mtl
+    , scotty
+    , split
+    , text
+    , unordered-containers
+    , vector
+    , wai-cors
+    , wreq
+  default-language: Haskell2010
