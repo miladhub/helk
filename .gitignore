@@ -20,3 +20,4 @@ cabal.project.local
 .HTF/
 .idea
 .DS_Store
+stack.yaml.lock
