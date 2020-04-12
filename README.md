@@ -4,7 +4,7 @@ This is a hello world project in Haskell. The project uses Scotty for REST, Aeso
 
 # Prerequisites
 
-  Helk uses (MongoDB)[https://docs.mongodb.com/manual/administration/install-community/] to store people information.
+  Helk uses [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) to store people information.
 
 # Building
 
