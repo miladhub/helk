@@ -2,6 +2,10 @@
 
 This is a hello world project in Haskell. The project uses Scotty for REST, Aeson for JSON manipulation and MongoDB for persistence.
 
+# Prerequisites
+
+  Helk uses (MongoDB)[https://docs.mongodb.com/manual/administration/install-community/] to store people information.
+
 # Build
 
     stack build
