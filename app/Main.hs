@@ -17,10 +17,17 @@ helk = do
       corsMethods = ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTION"]
     }
   get "/" showLandingPage
+  get "/headers" showHeaders
   get "/people/:name" showPerson
   get "/people" showPeople
   post "/people" addPerson
   delete "/people/:name" removePerson
+
+showHeaders :: ActionM ()
+showHeaders = do
+  hs <- headers
+  text . pack $ show hs
+  return ()
 
 showLandingPage :: ActionM ()
 showLandingPage = do
